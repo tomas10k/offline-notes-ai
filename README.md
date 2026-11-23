@@ -1,6 +1,9 @@
-# Personal Wiki CLI with Local Gemma
+# 📚 Offline Notes AI: a private wiki assistant running Gemma locally
 
-A terminal program that answers questions about my own notes using Gemma 4 E2B running locally on my Mac, fully offline. Built for MBA 290T, Assignment 4.
+> 🧪 **AI Lab · 03 / 04 · Local LLMs & retrieval (RAG)**<br>
+> One of a series of hands-on AI builds, each one learning a new layer of the stack by shipping something real. [See all builds →](https://github.com/tomas10k/ai-lab)
+
+A terminal program that answers questions about my own notes using Gemma 4 E2B running locally on my Mac, fully offline, with every answer citing the exact passage it came from.
 
 **Where to look first**
 
@@ -15,7 +18,7 @@ A terminal program that answers questions about my own notes using Gemma 4 E2B r
 
 ## 1. Purpose and sources
 
-This wiki is my personal study memory for three Fall 2026 Haas courses: Designing Financial Models that Work, Fundamentals of Agentic AI, and Negotiations. It should answer the concrete questions I have while preparing for classes, assignments and interviews (a style guide rule, a due date, what to do at a specific moment of a negotiation) and point me to the exact place in my notes where the answer lives.
+This wiki is my personal study memory for three Fall 2026 Haas courses: Designing Financial Models that Work, Foundations of Agentic AI, and Negotiations. It should answer the concrete questions I have while preparing for classes, assignments and interviews (a style guide rule, a due date, what to do at a specific moment of a negotiation) and point me to the exact place in my notes where the answer lives.
 
 | Source (unchanged original) | Wiki folder | Notes generated |
 |---|---|---|
@@ -71,7 +74,7 @@ wiki ingest vault/raw
 **Every new Terminal window**
 
 ```
-cd ~/haas-ai-a4-knowledge-hub
+cd ~/offline-notes-ai
 source .venv/bin/activate
 ```
 
@@ -194,3 +197,10 @@ Every card in `evidence/runs/` records `network: offline (no internet connection
 The clearest failure is Test 2. My notes answer "What should I do if the other side opens with an outrageous number?" directly in section 9 under "Extreme first offer", but keyword search ranked DFMW rounding tips higher because the question and the right passage share almost no words. `wiki search "extreme first offer"` ranks section 9 first, which shows retrieval works with the notes' own wording and fails on paraphrase. The model behaved well: given the wrong passages, it said insufficient evidence instead of inventing advice. My improvement would be hybrid retrieval: download a small local embedding model while online, embed every passage during ingest, combine embedding similarity with the BM25 score, and rerun all four tests offline.
 
 A second lesson came from the three runs. With a small model, rules buried in a long system prompt were followed inconsistently. Moving the reminders to the end of the message fixed Test 3 and the chat capability answer, but made the model over cautious on the standalone DFMW due date question, and chat still repeated my false October 20 date before citing October 14. Every prompt change therefore needs the full test set rerun, and checks that matter (like contradiction with the notes) are better enforced in code than requested in a prompt.
+
+
+---
+
+<p align="center">
+<a href="https://github.com/tomas10k/tiny-gpt-from-scratch">← 02 · Tiny GPT from scratch</a> &nbsp;·&nbsp; <a href="https://github.com/tomas10k/ai-lab"><b>🧪 AI Lab</b></a> &nbsp;·&nbsp; <a href="https://github.com/tomas10k/spotify-review-insights">04 · Spotify review insights →</a>
+</p>
